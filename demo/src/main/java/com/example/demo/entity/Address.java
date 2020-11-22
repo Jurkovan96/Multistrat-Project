@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.demo.entity;
 
 import javax.persistence.*;
 
@@ -8,7 +8,7 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int addressId;
+    private Integer addressId;
 
     @Column(name = "street")
     private String street;

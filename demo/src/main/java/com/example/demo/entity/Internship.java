@@ -1,8 +1,7 @@
-package com.example.demo.model;
+package com.example.demo.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "Internship")
