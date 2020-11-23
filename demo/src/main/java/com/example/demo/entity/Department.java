@@ -1,9 +1,16 @@
 package com.example.demo.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity(name = "Department")
 @Table(name = "department")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Department {
 
     @Id
@@ -13,9 +20,6 @@ public class Department {
 
     @Column(name = "departmentName")
     private String departmentName;
-
-    public Department() {
-    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")

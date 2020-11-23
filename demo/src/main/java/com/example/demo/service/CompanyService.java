@@ -11,12 +11,13 @@ import java.util.List;
 @Service
 public class CompanyService {
 
-
     @Autowired
     CompanyRepository companyRepository;
 
     public List<Company> getAllCompanies() {
         return companyRepository.findAll();
     }
+
+
 
 }

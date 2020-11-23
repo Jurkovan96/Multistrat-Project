@@ -2,13 +2,13 @@ package com.example.demo.restcontroller;
 
 import com.example.demo.entity.Address;
 import com.example.demo.entity.Company;
-import com.example.demo.entity.Internship;
-import com.example.demo.entity.Student;
-import com.example.demo.service.*;
+import com.example.demo.model.AddressDto;
+import com.example.demo.service.AddressService;
+import com.example.demo.service.CompanyService;
+import com.example.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
@@ -42,16 +42,6 @@ public class CompanyRestController {
 
     @GetMapping("hello")
     public String getHello() {
-        Student student = new Student();
-        Timestamp date = new Timestamp(3281);
-        student.setName("Beatrice");
-        student.setSurname("Ciuta");
-        student.setFaculty("FEAA");
-        student.setBirthDate(date);
-        student.setEmail("beatrice@gmail.com");
-        student.setPassword("test1234");
-        student.setPhoneNumber("39812721");
-        studentService.insertWithEntityManager(student);
         return "Hello, World";
     }
 

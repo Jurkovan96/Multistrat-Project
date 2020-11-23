@@ -12,5 +12,4 @@ public interface AddressRepository extends JpaRepository<Address, Integer> {
     Address findAllByAddressId(Integer addressId);
 
     List<Address> findAll();
-
 }

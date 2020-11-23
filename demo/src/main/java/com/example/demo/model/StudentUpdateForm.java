@@ -3,7 +3,6 @@ package com.example.demo.model;
 import java.util.Date;
 
 public class StudentUpdateForm {
-
     private String email;
     private String password;
     private String name;
@@ -11,6 +10,15 @@ public class StudentUpdateForm {
     private Date birthDate;
     private String phoneNumber;
     private String faculty;
+    private Integer addressId;
+
+    public Integer getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Integer addressId) {
+        this.addressId = addressId;
+    }
 
     public String getEmail() {
         return email;

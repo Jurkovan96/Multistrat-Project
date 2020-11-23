@@ -1,16 +1,15 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.Student;
+import com.example.demo.model.StudentDto;
 import com.example.demo.model.StudentUpdateForm;
+import com.example.demo.repository.AddressRepository;
 import com.example.demo.repository.StudentRepository;
-import com.example.demo.restcontroller.StudentDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class StudentService {
@@ -18,8 +17,8 @@ public class StudentService {
     @Autowired
     StudentRepository studentRepository;
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    @Autowired
+    AddressRepository addressRepository;
 
     private final ModelMapper modelMapper = new ModelMapper();
 
@@ -33,29 +32,23 @@ public class StudentService {
                 studentUpdateForm.getPhoneNumber(), studentUpdateForm.getBirthDate());
     }
 
-    public Student getStudentByIdObject(Integer studentId){
+    public Student getStudentByIdObject(Integer studentId) {
         return studentRepository.findByUserId(studentId);
     }
 
-    @Transactional
-    public void insertWithQuery(Student student) {
-        entityManager.createNativeQuery("INSERT INTO Student(passwod, email, phone, address_id, " +
-                "name, surname, faculty, birthDate, intership_id) VALUES (?,?,?,?,?,?,?,?,?)")
-                .setParameter(1, student.getPassword())
-                .setParameter(2, student.getEmail())
-                .setParameter(3, student.getPhoneNumber())
-                .setParameter(4, student.getAddress().getAddressId())
-                .setParameter(5, student.getName())
-                .setParameter(6, student.getSurname())
-                .setParameter(7, student.getFaculty())
-                .setParameter(8, student.getBirthDate())
-                .setParameter(9, student.getInternship().getInternshipId())
-                .executeUpdate();
+    public List<Student> getAllStudents() {
+        return studentRepository.findAll();
     }
 
-    @Transactional
-    public void insertWithEntityManager(Student student) {
-        this.entityManager.persist(student);
+    public void saveStudent(Student student) {
+        studentRepository.save(student);
     }
 
+    public void deleteStudent(Integer id) {
+        studentRepository.deleteById(id);
+    }
+
+    public void addStudent(Student student) {
+        studentRepository.save(student);
+    }
 }

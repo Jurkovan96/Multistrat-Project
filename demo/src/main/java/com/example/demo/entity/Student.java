@@ -25,10 +25,10 @@ public class Student extends User {
     private String faculty;
 
     @Column(name = "birthDate")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date birthDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "intership_id")
     private Internship internship;
 

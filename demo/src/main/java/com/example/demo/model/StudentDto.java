@@ -1,4 +1,4 @@
-package com.example.demo.restcontroller;
+package com.example.demo.model;
 
 import lombok.Data;
 
