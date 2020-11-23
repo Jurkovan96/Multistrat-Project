@@ -1,10 +1,17 @@
 package com.example.demo.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity(name = "Schedule")
 @Table(name = "schedule")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Schedule {
 
     @Id
@@ -23,9 +30,6 @@ public class Schedule {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id")
     private Task task;
-
-    public Schedule() {
-    }
 
     public Integer getScheduleId() {
         return scheduleId;

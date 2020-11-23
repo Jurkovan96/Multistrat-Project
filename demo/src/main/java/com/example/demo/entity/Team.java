@@ -1,9 +1,16 @@
 package com.example.demo.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity(name = "Team")
 @Table(name = "team")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Team {
 
     @Id
@@ -19,9 +26,6 @@ public class Team {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "internship_id")
     private Internship internship;
-
-    public Team() {
-    }
 
     public Integer getTeamId() {
         return teamId;

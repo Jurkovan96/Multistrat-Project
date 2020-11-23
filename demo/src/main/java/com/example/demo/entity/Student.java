@@ -1,10 +1,18 @@
 package com.example.demo.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity(name = "Student")
 @Table(name = "student")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Student extends User {
 
     @Column(name = "name")
@@ -17,14 +25,12 @@ public class Student extends User {
     private String faculty;
 
     @Column(name = "birthDate")
-    private Timestamp timestamp;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date birthDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "intership_id")
     private Internship internship;
-
-    public Student() {
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -38,8 +44,8 @@ public class Student extends User {
         this.faculty = faculty;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
+    public void setBirthDate(Timestamp timestamp) {
+        this.birthDate = timestamp;
     }
 
     public Internship getInternship() {
@@ -62,7 +68,7 @@ public class Student extends User {
         return faculty;
     }
 
-    public Timestamp getTimestamp() {
-        return timestamp;
+    public Date getBirthDate() {
+        return birthDate;
     }
 }

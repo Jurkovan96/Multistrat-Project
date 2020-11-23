@@ -9,12 +9,13 @@ public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "departmentId")
-    private int departmentId;
+    private Integer departmentId;
 
     @Column(name = "departmentName")
     private String departmentName;
 
-    public Department(){}
+    public Department() {
+    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
@@ -28,7 +29,7 @@ public class Department {
         this.company = company;
     }
 
-    public int getDepartmentId() {
+    public Integer getDepartmentId() {
         return departmentId;
     }
 

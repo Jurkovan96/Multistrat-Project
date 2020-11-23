@@ -1,11 +1,17 @@
 package com.example.demo.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Table(name = "Address")
 @Entity(name = "address")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Address {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer addressId;
@@ -24,11 +30,6 @@ public class Address {
 
     @Column(name = "postalCode")
     private int postalCode;
-
-    public Address() {
-
-    }
-
 
     public int getAddressId() {
         return addressId;

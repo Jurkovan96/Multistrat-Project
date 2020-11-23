@@ -10,4 +10,6 @@ import java.util.List;
 public interface CompanyRepository extends JpaRepository<Company, Integer> {
 
     List<Company> findAll();
+
+    Company findAllByAddress_AddressId(Integer address_addressId);
 }

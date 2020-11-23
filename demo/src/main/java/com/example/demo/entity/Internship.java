@@ -10,7 +10,7 @@ public class Internship {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int internshipId;
+    private Integer internshipId;
 
     @Column(name = "internshipName")
     private String internshipName;

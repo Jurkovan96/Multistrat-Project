@@ -1,37 +1,25 @@
-package com.example.demo.entity;
+package com.example.demo.service;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.example.demo.entity.Department;
+import com.example.demo.entity.Internship;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "Company")
-@Table(name = "company")
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
-public class Company extends User {
-
-    @Column(name = "companyName")
+public class CompanyDto {
+    private int companyId;
     private String companyName;
-
-    @Column(name = "companyCode")
     private String companyCode;
-
-    @Column(name = "contactPerson")
     private String contactPerson;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
     private final List<Department> departments = new ArrayList<>();
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
     private final List<Internship> internships = new ArrayList<>();
 
-    public List<Department> getDepartments() {
-        return departments;
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
     }
 
     public String getCompanyName() {
@@ -56,5 +44,13 @@ public class Company extends User {
 
     public void setContactPerson(String contactPerson) {
         this.contactPerson = contactPerson;
+    }
+
+    public List<Department> getDepartments() {
+        return departments;
+    }
+
+    public List<Internship> getInternships() {
+        return internships;
     }
 }
