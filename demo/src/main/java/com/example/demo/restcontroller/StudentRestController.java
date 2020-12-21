@@ -1,7 +1,6 @@
 package com.example.demo.restcontroller;
 
 import com.example.demo.entity.Student;
-import com.example.demo.model.StudentDto;
 import com.example.demo.model.StudentUpdateForm;
 import com.example.demo.service.StudentService;
 import org.modelmapper.ModelMapper;

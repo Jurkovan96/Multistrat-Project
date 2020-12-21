@@ -14,7 +14,6 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 public class Student extends User {
-
     @Column(name = "name")
     private String name;
 
@@ -71,4 +70,5 @@ public class Student extends User {
     public Date getBirthDate() {
         return birthDate;
     }
+
 }

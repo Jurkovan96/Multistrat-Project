@@ -5,10 +5,14 @@ import com.example.demo.model.StudentDto;
 import com.example.demo.model.StudentUpdateForm;
 import com.example.demo.repository.AddressRepository;
 import com.example.demo.repository.StudentRepository;
+import com.example.demo.util.ValidationException;
 import org.modelmapper.ModelMapper;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.Null;
 import java.util.List;
 
 @Service
@@ -44,11 +48,31 @@ public class StudentService {
         studentRepository.save(student);
     }
 
+    public void newMethod() {
+
+    }
+
+    public Student getByEmail(String email) {
+        return studentRepository.findByEmail(email);
+    }
+
     public void deleteStudent(Integer id) {
         studentRepository.deleteById(id);
     }
 
     public void addStudent(Student student) {
         studentRepository.save(student);
+    }
+
+    public boolean checkUserObj(String emailAddress, String password) {
+        if (studentRepository.findByEmail(emailAddress) != null) {
+            if (studentRepository.findByEmail(emailAddress).getPassword().equals(password)) {
+                return true;
+            } else {
+                throw new ValidationException("wrong.password");
+            }
+        } else {
+            throw new ValidationException("wrong.emailAddress");
+        }
     }
 }

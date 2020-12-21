@@ -1,11 +1,18 @@
 package com.example.demo.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
 @Entity(name = "Internship")
 @Table(name = "internship")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Internship {
 
     @Id
@@ -49,8 +56,6 @@ public class Internship {
         this.listOfStudents = listOfStudents;
     }
 
-    public Internship() {
-    }
 
     public int getInternshipId() {
         return internshipId;

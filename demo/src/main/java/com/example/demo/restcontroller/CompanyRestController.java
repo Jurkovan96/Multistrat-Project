@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/com")
 @SessionAttributes
 public class CompanyRestController {
 
@@ -44,6 +44,5 @@ public class CompanyRestController {
     public String getHello() {
         return "Hello, World";
     }
-
 
 }

@@ -18,6 +18,8 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 
     Student findByUserId(Integer userId);
 
+    Student findByEmail(String email);
+
     @Modifying
     @Transactional
     @Query("update Student s set s.email=:email, s.password=:password, s.phoneNumber=:phoneNo, s.faculty=:faculty, " +
