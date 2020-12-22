@@ -43,7 +43,7 @@ public class Internship {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "internship")
     private List<Team> listOfTeams;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "company_id")
     private Company company;
 
@@ -103,6 +103,14 @@ public class Internship {
 
     public void setInternshipAvailableSpaces(int internshipAvailableSpaces) {
         this.internshipAvailableSpaces = internshipAvailableSpaces;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public String getInternshipBenefits() {

@@ -62,14 +62,15 @@
              class="w3-button w3-red w3-right w3-xxlarge"><i class="fa fa-remove"></i></span>
             <h2>Publish internship</h2>
         </div>
-        <div class="w3-panel">
+        <form class="w3-panel" id="from-post" action="<c:url value="/homepageCompany"/>" method="post">
+            <!-- <div class="w3-panel"> -->
             <label>Start Date</label>
-            <input class="w3-input w3-border w3-margin-bottom" type="date">
+            <input name="internshipStartDate" class="w3-input w3-border w3-margin-bottom" type="date">
             <label>End Date</label>
-            <input class="w3-input w3-border w3-margin-bottom" type="date">
+            <input name="internshipEndDate" class="w3-input w3-border w3-margin-bottom" type="date">
             <label>Title</label>
-            <input class="w3-input w3-border w3-margin-bottom" type="text">
-            <input class="w3-input w3-border w3-margin-bottom" style="height:150px"
+            <input name="internshipName" class="w3-input w3-border w3-margin-bottom" type="text">
+            <input name="internshipDesc" class="w3-input w3-border w3-margin-bottom" style="height:150px"
                    placeholder="What are the real benefits?">
             <div class="w3-section">
                 <a class="w3-button w3-red" onclick="document.getElementById('id01').style.display='none'">Cancel  <i
@@ -77,9 +78,13 @@
                 <a class="w3-button w3-light-grey w3-right"
                    onclick="document.getElementById('id01').style.display='none'">Publish  <i
                         class="fa fa-paper-plane"></i></a>
+
+                <button class="w3-bar-item" type="submit">Save internship</button>
             </div>
-        </div>
+        </form>
     </div>
+</div>
+</div>
 </div>
 
 <!-- Overlay effect when opening the side navigation on small screens -->

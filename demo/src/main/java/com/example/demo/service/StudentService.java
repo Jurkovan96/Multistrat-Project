@@ -4,15 +4,13 @@ import com.example.demo.entity.Student;
 import com.example.demo.model.StudentDto;
 import com.example.demo.model.StudentUpdateForm;
 import com.example.demo.repository.AddressRepository;
+import com.example.demo.repository.CompanyRepository;
 import com.example.demo.repository.StudentRepository;
 import com.example.demo.util.ValidationException;
 import org.modelmapper.ModelMapper;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.Null;
 import java.util.List;
 
 @Service
@@ -23,6 +21,9 @@ public class StudentService {
 
     @Autowired
     AddressRepository addressRepository;
+
+    @Autowired
+    CompanyRepository companyRepository;
 
     private final ModelMapper modelMapper = new ModelMapper();
 
@@ -48,10 +49,6 @@ public class StudentService {
         studentRepository.save(student);
     }
 
-    public void newMethod() {
-
-    }
-
     public Student getByEmail(String email) {
         return studentRepository.findByEmail(email);
     }
@@ -67,12 +64,20 @@ public class StudentService {
     public boolean checkUserObj(String emailAddress, String password) {
         if (studentRepository.findByEmail(emailAddress) != null) {
             if (studentRepository.findByEmail(emailAddress).getPassword().equals(password)) {
-                return true;
+                {
+                    return true;
+                }
+
             } else {
                 throw new ValidationException("wrong.password");
             }
         } else {
             throw new ValidationException("wrong.emailAddress");
         }
+    }
+
+    public String getCompanyName(Student studentByIdObject) {
+        System.out.println(companyRepository.findByUserId(studentByIdObject.getInternship().getCompany().getUserId()).getCompanyName());
+        return companyRepository.findByUserId(studentByIdObject.getInternship().getCompany().getUserId()).getCompanyName();
     }
 }

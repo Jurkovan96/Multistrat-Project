@@ -1,18 +1,19 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Internship;
+import com.example.demo.service.CompanyService;
 import com.example.demo.service.InternshipService;
 import com.example.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 @Controller
-@RequestMapping("/homepage")
 @SessionAttributes("id")
 public class HomepageController {
 
@@ -22,12 +23,46 @@ public class HomepageController {
     @Autowired
     private InternshipService internshipService;
 
-    @GetMapping
-    public String doMainPage(HttpSession httpSession, Model model) {
-//        String s = httpSession.getAttribute("id").toString();
-//        model.addAttribute("loggedUser", studentService.getStudentByIdObject(Integer.parseInt(s)));
+    @Autowired
+    private CompanyService companyService;
+
+
+    @RequestMapping(value = "/homepageCompany", method = RequestMethod.GET)
+    public String displayHomePageForCompany(HttpSession session, Model model) {
+        String s = session.getAttribute("id").toString();
+        model.addAttribute("loggedUser", companyService.getCompanyById(Integer.parseInt(s)));
         model.addAttribute("listOfInternships", internshipService.getAllInternships());
-        return "home";
+        return "homeCompany";
+    }
+
+    @RequestMapping(value = "/homepageStudent", method = RequestMethod.GET)
+    public String displayHomePageForStudent(HttpSession session, Model model) {
+        String s = session.getAttribute("id").toString();
+        model.addAttribute("loggedUser", studentService.getStudentByIdObject(Integer.parseInt(s)));
+        model.addAttribute("listOfInternships", internshipService.getAllInternships());
+        model.addAttribute("companyName", studentService.getCompanyName(studentService.getStudentByIdObject(Integer.parseInt(s))));
+        return "homeStudent";
+    }
+
+    @RequestMapping(value = "/homepageCompany", method = RequestMethod.POST)
+    public String addInternship(HttpSession httpSession, @RequestParam String internshipName, @RequestParam Date internshipStartDate, @RequestParam Date internshipEndDate, @RequestParam String internshipDesc) {
+        Internship internship = new Internship();
+        String s = httpSession.getAttribute("id").toString();
+        internship.setCompany(companyService.getCompanyById(Integer.parseInt(s)));
+        internship.setInternshipAvailableSpaces(20);
+        internship.setInternshipBenefits(internshipDesc);
+        internship.setInternshipName(internshipName);
+        internship.setInternshipEndDate(Timestamp.valueOf(String.valueOf(internshipEndDate).concat(" 00:00:00")));
+        internship.setInternshipStartDate(Timestamp.valueOf(String.valueOf(internshipStartDate).concat(" 00:00:00")));
+        internship.setInternshipType("Full-time");
+        internship.setInternshipId(20);
+        internshipService.addNewInternship(internship);
+        return "redirect:/homepageCompany";
+    }
+
+    @GetMapping("/testPage")
+    public String doTestAdd() {
+        return "testPage";
     }
 
 

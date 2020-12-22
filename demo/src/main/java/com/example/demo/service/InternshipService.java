@@ -17,5 +17,8 @@ public class InternshipService {
         return internshipRepository.findAll();
     }
 
+    public void addNewInternship(Internship internship) {
+        internshipRepository.save(internship);
+    }
 
 }

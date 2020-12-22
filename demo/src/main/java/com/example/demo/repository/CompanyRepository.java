@@ -21,6 +21,8 @@ public interface CompanyRepository extends JpaRepository<Company, Integer> {
 
     Company findAllByAddress_AddressId(Integer address_addressId);
 
+    Company findByEmail(String companyEmail);
+
     @Modifying
     @Transactional
     @Query("update Company c set c.password=:password, c.email=:email, c.phoneNumber=:phone, c.companyName=:companyName, c.companyCode=:companyCode, c.contactPerson=:contactPerson where c.userId=:id")
