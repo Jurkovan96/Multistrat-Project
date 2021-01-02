@@ -60,10 +60,13 @@ public class HomepageController {
         return "redirect:/homepageCompany";
     }
 
-    @GetMapping("/testPage")
-    public String doTestAdd() {
-        return "testPage";
+    @GetMapping("/homepageStudent/tasks")
+    public String displayTasksForStudent() {
+         return "redirect:/tasks";
     }
 
-
+    @GetMapping("/homepageStudent/team")
+    public String displayTeamForStudent() {
+        return "redirect:/team";
+    }
 }
