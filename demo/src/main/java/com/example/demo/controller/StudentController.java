@@ -14,45 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-@Controller
-@RequestMapping("students1")
-public class StudentController {
-    /**
-     * Service for getting the needed data.
-     */
-    @Autowired
-    private StudentService studentService;
-    /**
-     * Mapper for the class object
-     */
-    final ModelMapper modelMapper = new ModelMapper();
-    /**
-     * Logger used for log the current class
-     */
-    Logger logger = Logger.getLogger(StudentRestController.class.getName());
-
-    private final ModelAndView mModeAndView = new ModelAndView();
-
-    private final List<StudentDto> studentListInDto = new ArrayList<>();
-
-    @GetMapping
-    public ModelAndView displayStudentPage() {
-
-        mModeAndView.setViewName("studentsPage");
-        mModeAndView.addObject("studentsList", studentService.getAllStudents());
-
-        return mModeAndView;
-    }
+//@Controller
+//@RequestMapping("profile")
+//public class StudentController {
 //
-//    public void getAllStudents() {
-//        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-//        for (Student student : studentService.getAllStudents()) {
-//            StudentDto studentDto = modelMapper.map(student, StudentDto.class);
-//            studentListInDto.add(studentDto);
+//  @GetMapping
+//  public String showProfile(){
+//    return "profile";
+//  }
 //
-//        }
-//        logger.log(Level.INFO, String.valueOf(studentListInDto.size()));
-//    }
-
-
-}
+//}

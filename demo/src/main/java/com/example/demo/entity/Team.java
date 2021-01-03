@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "Team")
 @Table(name = "team")
@@ -13,49 +14,60 @@ import javax.persistence.*;
 @Data
 public class Team {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer teamId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Integer teamId;
 
-    @Column(name = "team_name")
-    private String teamName;
+  @Column(name = "team_name")
+  private String teamName;
 
-    @Column(name = "capacity")
-    private int teamCapacity;
+  @Column(name = "capacity")
+  private int teamCapacity;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "internship_id")
-    private Internship internship;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "internship_id")
+  private Internship internship;
 
-    public Integer getTeamId() {
-        return teamId;
-    }
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "team")
+  private List<Student> listOfStudentsForTeam;
 
-    public void setTeamId(Integer teamId) {
-        this.teamId = teamId;
-    }
+  public List<Student> getListOfStudentsForTeam() {
+    return listOfStudentsForTeam;
+  }
 
-    public String getTeamName() {
-        return teamName;
-    }
+  public void setListOfStudentsForTeam(List<Student> listOfStudentsForTeam) {
+    this.listOfStudentsForTeam = listOfStudentsForTeam;
+  }
 
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
-    }
+  public Integer getTeamId() {
+    return teamId;
+  }
 
-    public int getTeamCapacity() {
-        return teamCapacity;
-    }
+  public void setTeamId(Integer teamId) {
+    this.teamId = teamId;
+  }
 
-    public void setTeamCapacity(int teamCapacity) {
-        this.teamCapacity = teamCapacity;
-    }
+  public String getTeamName() {
+    return teamName;
+  }
 
-    public Internship getInternship() {
-        return internship;
-    }
+  public void setTeamName(String teamName) {
+    this.teamName = teamName;
+  }
 
-    public void setInternship(Internship internship) {
-        this.internship = internship;
-    }
+  public int getTeamCapacity() {
+    return teamCapacity;
+  }
+
+  public void setTeamCapacity(int teamCapacity) {
+    this.teamCapacity = teamCapacity;
+  }
+
+  public Internship getInternship() {
+    return internship;
+  }
+
+  public void setInternship(Internship internship) {
+    this.internship = internship;
+  }
 }

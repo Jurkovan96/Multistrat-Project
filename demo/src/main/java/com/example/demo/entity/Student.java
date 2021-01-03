@@ -12,63 +12,75 @@ import java.util.Date;
 @Table(name = "student")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+
 public class Student extends User {
-    @Column(name = "name")
-    private String name;
+  @Column(name = "name")
+  private String name;
 
-    @Column(name = "surname")
-    private String surname;
+  @Column(name = "surname")
+  private String surname;
 
-    @Column(name = "faculty")
-    private String faculty;
+  @Column(name = "faculty")
+  private String faculty;
 
-    @Column(name = "birthDate")
-    @Temporal(TemporalType.DATE)
-    private Date birthDate;
+  @Column(name = "birthDate")
+  @Temporal(TemporalType.DATE)
+  private Date birthDate;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "intership_id")
-    private Internship internship;
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "intership_id")
+  private Internship internship;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "team_id")
+  private Team team;
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
+  public Team getTeam() {
+    return team;
+  }
 
-    public void setFaculty(String faculty) {
-        this.faculty = faculty;
-    }
+  public void setTeam(Team team) {
+    this.team = team;
+  }
 
-    public void setBirthDate(Timestamp timestamp) {
-        this.birthDate = timestamp;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public Internship getInternship() {
-        return internship;
-    }
+  public void setSurname(String surname) {
+    this.surname = surname;
+  }
 
-    public void setInternship(Internship internship) {
-        this.internship = internship;
-    }
+  public void setFaculty(String faculty) {
+    this.faculty = faculty;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public void setBirthDate(Timestamp timestamp) {
+    this.birthDate = timestamp;
+  }
 
-    public String getSurname() {
-        return surname;
-    }
+  public Internship getInternship() {
+    return internship;
+  }
 
-    public String getFaculty() {
-        return faculty;
-    }
+  public void setInternship(Internship internship) {
+    this.internship = internship;
+  }
 
-    public Date getBirthDate() {
-        return birthDate;
-    }
+  public String getName() {
+    return name;
+  }
+
+  public String getSurname() {
+    return surname;
+  }
+
+  public String getFaculty() {
+    return faculty;
+  }
+
+  public Date getBirthDate() {
+    return birthDate;
+  }
 
 }

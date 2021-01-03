@@ -28,4 +28,5 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
                        @Param("name") String name, @Param("surname") String surname, @Param("faculty") String faculty,
                        @Param("phoneNo") String phoneNo, @Param("dateOfBirth") Date dateOfBirth);
 
+  Student findByName(String name);
 }

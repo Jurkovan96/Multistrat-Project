@@ -17,56 +17,61 @@ import java.sql.Timestamp;
 @SessionAttributes("id")
 public class HomepageController {
 
-    @Autowired
-    private StudentService studentService;
+  @Autowired
+  private StudentService studentService;
 
-    @Autowired
-    private InternshipService internshipService;
+  @Autowired
+  private InternshipService internshipService;
 
-    @Autowired
-    private CompanyService companyService;
+  @Autowired
+  private CompanyService companyService;
 
 
-    @RequestMapping(value = "/homepageCompany", method = RequestMethod.GET)
-    public String displayHomePageForCompany(HttpSession session, Model model) {
-        String s = session.getAttribute("id").toString();
-        model.addAttribute("loggedUser", companyService.getCompanyById(Integer.parseInt(s)));
-        model.addAttribute("listOfInternships", internshipService.getAllInternships());
-        return "homeCompany";
-    }
+  @RequestMapping(value = "/homepageCompany", method = RequestMethod.GET)
+  public String displayHomePageForCompany(HttpSession session, Model model) {
+    String s = session.getAttribute("id").toString();
+    model.addAttribute("loggedUser", companyService.getCompanyById(Integer.parseInt(s)));
+    model.addAttribute("listOfInternships", internshipService.getAllInternships());
+    return "homeCompany";
+  }
 
-    @RequestMapping(value = "/homepageStudent", method = RequestMethod.GET)
-    public String displayHomePageForStudent(HttpSession session, Model model) {
-        String s = session.getAttribute("id").toString();
-        model.addAttribute("loggedUser", studentService.getStudentByIdObject(Integer.parseInt(s)));
-        model.addAttribute("listOfInternships", internshipService.getAllInternships());
-        model.addAttribute("companyName", studentService.getCompanyName(studentService.getStudentByIdObject(Integer.parseInt(s))));
-        return "homeStudent";
-    }
+  @RequestMapping(value = "/homepageStudent", method = RequestMethod.GET)
+  public String displayHomePageForStudent(HttpSession session, Model model) {
+    String s = session.getAttribute("id").toString();
+    model.addAttribute("loggedUser", studentService.getStudentByIdObject(Integer.parseInt(s)));
+    model.addAttribute("listOfInternships", internshipService.getAllInternships());
+    model.addAttribute("companyName", studentService.getCompanyName(studentService.getStudentByIdObject(Integer.parseInt(s))));
+    return "homeStudent";
+  }
 
-    @RequestMapping(value = "/homepageCompany", method = RequestMethod.POST)
-    public String addInternship(HttpSession httpSession, @RequestParam String internshipName, @RequestParam Date internshipStartDate, @RequestParam Date internshipEndDate, @RequestParam String internshipDesc) {
-        Internship internship = new Internship();
-        String s = httpSession.getAttribute("id").toString();
-        internship.setCompany(companyService.getCompanyById(Integer.parseInt(s)));
-        internship.setInternshipAvailableSpaces(20);
-        internship.setInternshipBenefits(internshipDesc);
-        internship.setInternshipName(internshipName);
-        internship.setInternshipEndDate(Timestamp.valueOf(String.valueOf(internshipEndDate).concat(" 00:00:00")));
-        internship.setInternshipStartDate(Timestamp.valueOf(String.valueOf(internshipStartDate).concat(" 00:00:00")));
-        internship.setInternshipType("Full-time");
-        internship.setInternshipId(20);
-        internshipService.addNewInternship(internship);
-        return "redirect:/homepageCompany";
-    }
+  @RequestMapping(value = "/homepageCompany", method = RequestMethod.POST)
+  public String addInternship(HttpSession httpSession, @RequestParam String internshipName, @RequestParam Date internshipStartDate, @RequestParam Date internshipEndDate, @RequestParam String internshipDesc) {
+    Internship internship = new Internship();
+    String s = httpSession.getAttribute("id").toString();
+    internship.setCompany(companyService.getCompanyById(Integer.parseInt(s)));
+    internship.setInternshipAvailableSpaces(20);
+    internship.setInternshipBenefits(internshipDesc);
+    internship.setInternshipName(internshipName);
+    internship.setInternshipEndDate(Timestamp.valueOf(String.valueOf(internshipEndDate).concat(" 00:00:00")));
+    internship.setInternshipStartDate(Timestamp.valueOf(String.valueOf(internshipStartDate).concat(" 00:00:00")));
+    internship.setInternshipType("Full-time");
+    internship.setInternshipId(20);
+    internshipService.addNewInternship(internship);
+    return "redirect:/homepageCompany";
+  }
 
-    @GetMapping("/homepageStudent/tasks")
-    public String displayTasksForStudent() {
-         return "redirect:/tasks";
-    }
+  @GetMapping("/homepageStudent/tasks")
+  public String displayTasksForStudent() {
+    return "redirect:/tasks";
+  }
 
-    @GetMapping("/homepageStudent/team")
-    public String displayTeamForStudent() {
-        return "redirect:/team";
-    }
+  @GetMapping("/homepageStudent/team")
+  public String displayTeamForStudent() {
+    return "redirect:/team";
+  }
+
+  @GetMapping("/homepageStudent/profile")
+  public String displayProfileInfo(){
+    return "redirect:/profile";
+  }
 }

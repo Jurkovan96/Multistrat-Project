@@ -13,60 +13,82 @@ import javax.persistence.*;
 @Data
 public class Task {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer taskId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Integer taskId;
 
-    @Column(name = "task_name")
-    private String taskName;
+  @Column(name = "task_name")
+  private String taskName;
 
-    @Column(name = "review")
-    private String taskReview;
+  @Column(name = "review")
+  private String taskReview;
 
-    @Column(name = "difficulty")
-    private String taskDifficulty;
+  @Column(name = "difficulty")
+  private String taskDifficulty;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_id")
-    private Project project;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "project_id")
+  private Project project;
 
-    public Integer getTaskId() {
-        return taskId;
-    }
+  @Column(name = "user_id")
+  private Integer userId;
 
-    public void setTaskId(Integer taskId) {
-        this.taskId = taskId;
-    }
+  @Column(name = "task_status")
+  private String taskStatus;
 
-    public String getTaskName() {
-        return taskName;
-    }
+  public Integer getUserId() {
+    return userId;
+  }
 
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
-    }
+  public void setUserId(Integer userId) {
+    this.userId = userId;
+  }
 
-    public String getTaskReview() {
-        return taskReview;
-    }
+  public String getTaskStatus() {
+    return taskStatus;
+  }
 
-    public void setTaskReview(String taskReview) {
-        this.taskReview = taskReview;
-    }
+  public void setTaskStatus(String taskStatus) {
+    this.taskStatus = taskStatus;
+  }
 
-    public String getTaskDifficulty() {
-        return taskDifficulty;
-    }
+  public Integer getTaskId() {
+    return taskId;
+  }
 
-    public void setTaskDifficulty(String taskDifficulty) {
-        this.taskDifficulty = taskDifficulty;
-    }
+  public void setTaskId(Integer taskId) {
+    this.taskId = taskId;
+  }
 
-    public Project getProject() {
-        return project;
-    }
+  public String getTaskName() {
+    return taskName;
+  }
 
-    public void setProject(Project project) {
-        this.project = project;
-    }
+  public void setTaskName(String taskName) {
+    this.taskName = taskName;
+  }
+
+  public String getTaskReview() {
+    return taskReview;
+  }
+
+  public void setTaskReview(String taskReview) {
+    this.taskReview = taskReview;
+  }
+
+  public String getTaskDifficulty() {
+    return taskDifficulty;
+  }
+
+  public void setTaskDifficulty(String taskDifficulty) {
+    this.taskDifficulty = taskDifficulty;
+  }
+
+  public Project getProject() {
+    return project;
+  }
+
+  public void setProject(Project project) {
+    this.project = project;
+  }
 }

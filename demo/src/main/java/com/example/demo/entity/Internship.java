@@ -12,112 +12,112 @@ import java.util.List;
 @Table(name = "internship")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+
 public class Internship {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer internshipId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Integer internshipId;
 
-    @Column(name = "internshipName")
-    private String internshipName;
+  @Column(name = "internshipName")
+  private String internshipName;
 
-    @Column(name = "startdate")
-    private Timestamp internshipStartDate;
+  @Column(name = "startdate")
+  private Timestamp internshipStartDate;
 
-    @Column(name = "enddate")
-    private Timestamp internshipEndDate;
+  @Column(name = "enddate")
+  private Timestamp internshipEndDate;
 
-    @Column(name = "type")
-    private String internshipType;
+  @Column(name = "type")
+  private String internshipType;
 
-    @Column(name = "spaces")
-    private int internshipAvailableSpaces;
+  @Column(name = "spaces")
+  private int internshipAvailableSpaces;
 
-    @Column(name = "benefits")
-    private String internshipBenefits;
+  @Column(name = "benefits")
+  private String internshipBenefits;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "internship")
-    private List<Student> listOfStudents;
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "internship")
+  private List<Student> listOfStudents;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "internship")
-    private List<Team> listOfTeams;
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "internship")
+  private List<Team> listOfTeams;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "company_id")
-    private Company company;
-
-
-    public List<Student> getListOfStudents() {
-        return listOfStudents;
-    }
-
-    public void setListOfStudents(List<Student> listOfStudents) {
-        this.listOfStudents = listOfStudents;
-    }
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "company_id")
+  private Company company;
 
 
-    public int getInternshipId() {
-        return internshipId;
-    }
+  public List<Student> getListOfStudents() {
+    return listOfStudents;
+  }
 
-    public void setInternshipId(int internshipId) {
-        this.internshipId = internshipId;
-    }
+  public void setListOfStudents(List<Student> listOfStudents) {
+    this.listOfStudents = listOfStudents;
+  }
 
-    public String getInternshipName() {
-        return internshipName;
-    }
 
-    public void setInternshipName(String internshipName) {
-        this.internshipName = internshipName;
-    }
+  public int getInternshipId() {
+    return internshipId;
+  }
 
-    public Timestamp getInternshipStartDate() {
-        return internshipStartDate;
-    }
+  public void setInternshipId(int internshipId) {
+    this.internshipId = internshipId;
+  }
 
-    public void setInternshipStartDate(Timestamp internshipStartDate) {
-        this.internshipStartDate = internshipStartDate;
-    }
+  public String getInternshipName() {
+    return internshipName;
+  }
 
-    public Timestamp getInternshipEndDate() {
-        return internshipEndDate;
-    }
+  public void setInternshipName(String internshipName) {
+    this.internshipName = internshipName;
+  }
 
-    public void setInternshipEndDate(Timestamp internshipEndDate) {
-        this.internshipEndDate = internshipEndDate;
-    }
+  public Timestamp getInternshipStartDate() {
+    return internshipStartDate;
+  }
 
-    public String getInternshipType() {
-        return internshipType;
-    }
+  public void setInternshipStartDate(Timestamp internshipStartDate) {
+    this.internshipStartDate = internshipStartDate;
+  }
 
-    public void setInternshipType(String internshipType) {
-        this.internshipType = internshipType;
-    }
+  public Timestamp getInternshipEndDate() {
+    return internshipEndDate;
+  }
 
-    public int getInternshipAvailableSpaces() {
-        return internshipAvailableSpaces;
-    }
+  public void setInternshipEndDate(Timestamp internshipEndDate) {
+    this.internshipEndDate = internshipEndDate;
+  }
 
-    public void setInternshipAvailableSpaces(int internshipAvailableSpaces) {
-        this.internshipAvailableSpaces = internshipAvailableSpaces;
-    }
+  public String getInternshipType() {
+    return internshipType;
+  }
 
-    public Company getCompany() {
-        return company;
-    }
+  public void setInternshipType(String internshipType) {
+    this.internshipType = internshipType;
+  }
 
-    public void setCompany(Company company) {
-        this.company = company;
-    }
+  public int getInternshipAvailableSpaces() {
+    return internshipAvailableSpaces;
+  }
 
-    public String getInternshipBenefits() {
-        return internshipBenefits;
-    }
+  public void setInternshipAvailableSpaces(int internshipAvailableSpaces) {
+    this.internshipAvailableSpaces = internshipAvailableSpaces;
+  }
 
-    public void setInternshipBenefits(String internshipBenefits) {
-        this.internshipBenefits = internshipBenefits;
-    }
+  public Company getCompany() {
+    return company;
+  }
+
+  public void setCompany(Company company) {
+    this.company = company;
+  }
+
+  public String getInternshipBenefits() {
+    return internshipBenefits;
+  }
+
+  public void setInternshipBenefits(String internshipBenefits) {
+    this.internshipBenefits = internshipBenefits;
+  }
 }

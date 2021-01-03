@@ -1,83 +1,122 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.Student;
+import com.example.demo.entity.Task;
 import com.example.demo.model.StudentDto;
 import com.example.demo.model.StudentUpdateForm;
 import com.example.demo.repository.AddressRepository;
 import com.example.demo.repository.CompanyRepository;
 import com.example.demo.repository.StudentRepository;
+import com.example.demo.util.Constants;
 import com.example.demo.util.ValidationException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class StudentService {
 
-    @Autowired
-    StudentRepository studentRepository;
+  @Autowired
+  StudentRepository studentRepository;
 
-    @Autowired
-    AddressRepository addressRepository;
+  @Autowired
+  AddressRepository addressRepository;
 
-    @Autowired
-    CompanyRepository companyRepository;
+  @Autowired
+  CompanyRepository companyRepository;
 
-    private final ModelMapper modelMapper = new ModelMapper();
+  @Autowired
+  TaskService taskService;
 
-    public StudentDto getStudentById(Integer studentId) {
-        return modelMapper.map(studentRepository.findByUserId(studentId), StudentDto.class);
-    }
+  private final ModelMapper modelMapper = new ModelMapper();
 
-    public void updateStudent(Integer studentId, StudentUpdateForm studentUpdateForm) {
-        studentRepository.updateStudent(studentId, studentUpdateForm.getEmail(), studentUpdateForm.getPassword(),
-                studentUpdateForm.getName(), studentUpdateForm.getSurname(), studentUpdateForm.getFaculty(),
-                studentUpdateForm.getPhoneNumber(), studentUpdateForm.getBirthDate());
-    }
+  public StudentDto getStudentById(Integer studentId) {
+    return modelMapper.map(studentRepository.findByUserId(studentId), StudentDto.class);
+  }
 
-    public Student getStudentByIdObject(Integer studentId) {
-        return studentRepository.findByUserId(studentId);
-    }
+  public void updateStudent(Integer studentId, StudentUpdateForm studentUpdateForm) {
+    studentRepository.updateStudent(studentId, studentUpdateForm.getEmail(), studentUpdateForm.getPassword(),
+      studentUpdateForm.getName(), studentUpdateForm.getSurname(), studentUpdateForm.getFaculty(),
+      studentUpdateForm.getPhoneNumber(), studentUpdateForm.getBirthDate());
+  }
 
-    public List<Student> getAllStudents() {
-        return studentRepository.findAll();
-    }
+  public Student getStudentByIdObject(Integer studentId) {
+    return studentRepository.findByUserId(studentId);
+  }
 
-    public void saveStudent(Student student) {
-        studentRepository.save(student);
-    }
+  public List<Student> getAllStudents() {
+    return studentRepository.findAll();
+  }
 
-    public Student getByEmail(String email) {
-        return studentRepository.findByEmail(email);
-    }
+  public void saveStudent(Student student) {
+    studentRepository.save(student);
+  }
 
-    public void deleteStudent(Integer id) {
-        studentRepository.deleteById(id);
-    }
+  public Student getByEmail(String email) {
+    return studentRepository.findByEmail(email);
+  }
 
-    public void addStudent(Student student) {
-        studentRepository.save(student);
-    }
+  public void deleteStudent(Integer id) {
+    studentRepository.deleteById(id);
+  }
 
-    public boolean checkUserObj(String emailAddress, String password) {
-        if (studentRepository.findByEmail(emailAddress) != null) {
-            if (studentRepository.findByEmail(emailAddress).getPassword().equals(password)) {
-                {
-                    return true;
-                }
+  public void addStudent(Student student) {
+    studentRepository.save(student);
+  }
 
-            } else {
-                throw new ValidationException("wrong.password");
-            }
-        } else {
-            throw new ValidationException("wrong.emailAddress");
+  public boolean checkUserObj(String emailAddress, String password) {
+    if (studentRepository.findByEmail(emailAddress) != null) {
+      if (studentRepository.findByEmail(emailAddress).getPassword().equals(password)) {
+        {
+          return true;
         }
-    }
 
-    public String getCompanyName(Student studentByIdObject) {
-        System.out.println(companyRepository.findByUserId(studentByIdObject.getInternship().getCompany().getUserId()).getCompanyName());
-        return companyRepository.findByUserId(studentByIdObject.getInternship().getCompany().getUserId()).getCompanyName();
+      } else {
+        throw new ValidationException("wrong.password");
+      }
+    } else {
+      throw new ValidationException("wrong.emailAddress");
     }
+  }
+
+  public String getCompanyName(Student studentByIdObject) {
+    System.out.println(companyRepository.findByUserId(studentByIdObject.getInternship().getCompany().getUserId()).getCompanyName());
+    return companyRepository.findByUserId(studentByIdObject.getInternship().getCompany().getUserId()).getCompanyName();
+  }
+
+
+  public Student getByName(String name) {
+    return studentRepository.findByName(name);
+  }
+
+  public List<StudentDto> getAllWithTasks(List<Student> students) {
+    List<StudentDto> studentDtoList = new ArrayList<>();
+    for (Student student : students) {
+      StudentDto studentDto = modelMapper.map(studentRepository.findByUserId(student.getUserId()), StudentDto.class);
+      for (Task task : taskService.getAllTasks()) {
+        if (task.getUserId().equals(studentDto.getId()) && task.getTaskStatus().equals(Constants.NOT_FINISHED)) {
+          studentDto.setCurrentTask(task.getTaskName().concat(" - ").concat(task.getTaskStatus()));
+        } else if (task.getUserId().equals(studentDto.getId()) && task.getTaskStatus().equals(Constants.FINISHED)) {
+          studentDto.setCurrentTask(Constants.NO_IN_PROGRESS_TASK);
+        }
+      }
+      studentDtoList.add(studentDto);
+    }
+    return studentDtoList;
+  }
+
+  public StudentDto getStudentForProfilePage(Integer studentId) {
+    StudentDto studentDto = this.getStudentById(studentId);
+    studentDto.getListOfContacts().add("FaceBook profile");
+    studentDto.getListOfContacts().add("Linkin profile");
+    studentDto.getListOfContacts().add("Work experience");
+    studentDto.getListOfContacts().add("Instagram profile");
+
+    studentDto.setListOfAllTasks(taskService.getAllUsersTasks(studentId));
+    return studentDto;
+  }
+
 }
