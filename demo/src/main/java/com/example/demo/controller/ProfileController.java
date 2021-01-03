@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.StudentDto;
 import com.example.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,12 +29,13 @@ public class ProfileController {
 
   @GetMapping("/user/{studentId}")
   public String displayAnotherUsersProfile(@PathVariable Integer studentId, Model model) {
-   model.addAttribute("studentModel", studentService.getStudentForProfilePage(studentId));
-   return "viewProfile";
+    model.addAttribute("studentModel", studentService.getStudentForProfilePage(studentId));
+    return "viewProfile";
   }
 
   @PostMapping("profile")
-  public void editProfilePage(){
-
+  public void editProfilePage(@ModelAttribute(name = "currentUser") StudentDto studentDto) {
+    System.out.println(studentDto.getEmail());
   }
+
 }
