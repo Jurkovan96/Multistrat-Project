@@ -27,7 +27,7 @@ public class TeamService {
   @Autowired
   TaskRepository taskRepository;
 
-  public List<Student> getStudentsByTeamBy(Integer id) {
+  public List<Student> getStudentsByTeam(Integer id) {
     Team team = teamRepository.findByTeamId(studentRepository.findByUserId(id).getTeam().getTeamId());
     return team.getListOfStudentsForTeam();
   }

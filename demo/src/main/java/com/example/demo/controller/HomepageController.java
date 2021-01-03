@@ -71,7 +71,17 @@ public class HomepageController {
   }
 
   @GetMapping("/homepageStudent/profile")
-  public String displayProfileInfo(){
+  public String displayProfileInfo() {
     return "redirect:/profile";
+  }
+
+  @GetMapping("/homepageCompany/projects")
+  public String displayProjectsForCompany() {
+    return "redirect:/project";
+  }
+
+  @GetMapping("/homepageCompany/task")
+  public String displayTasksForCompany() {
+    return "redirect:/task";
   }
 }

@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.Company;
-import com.example.demo.entity.User;
 import com.example.demo.repository.CompanyRepository;
 import com.example.demo.util.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,4 +39,5 @@ public class CompanyService {
     public Company getCompanyById(Integer companyId) {
         return companyRepository.findByUserId(companyId);
     }
+
 }

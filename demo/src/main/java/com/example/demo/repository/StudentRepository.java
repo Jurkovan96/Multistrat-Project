@@ -23,10 +23,10 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     @Modifying
     @Transactional
     @Query("update Student s set s.email=:email, s.password=:password, s.phoneNumber=:phoneNo, s.faculty=:faculty, " +
-            "s.birthDate =:dateOfBirth, s.name=:name, s.surname=:surname where s.userId=:id")
+            "s.name=:name, s.surname=:surname where s.userId=:id")
     void updateStudent(@Param("id") Integer id, @Param("email") String email, @Param("password") String password,
                        @Param("name") String name, @Param("surname") String surname, @Param("faculty") String faculty,
-                       @Param("phoneNo") String phoneNo, @Param("dateOfBirth") Date dateOfBirth);
+                       @Param("phoneNo") String phoneNo);
 
   Student findByName(String name);
 }

@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.Project;
 import com.example.demo.entity.Student;
 import com.example.demo.entity.Task;
+import com.example.demo.entity.Team;
 import com.example.demo.model.StudentDto;
 import com.example.demo.model.StudentUpdateForm;
 import com.example.demo.repository.AddressRepository;
@@ -31,6 +33,12 @@ public class StudentService {
   @Autowired
   TaskService taskService;
 
+  @Autowired
+  TeamService teamService;
+
+  @Autowired
+  ProjectService projectService;
+
   private final ModelMapper modelMapper = new ModelMapper();
 
   public StudentDto getStudentById(Integer studentId) {
@@ -40,7 +48,13 @@ public class StudentService {
   public void updateStudent(Integer studentId, StudentUpdateForm studentUpdateForm) {
     studentRepository.updateStudent(studentId, studentUpdateForm.getEmail(), studentUpdateForm.getPassword(),
       studentUpdateForm.getName(), studentUpdateForm.getSurname(), studentUpdateForm.getFaculty(),
-      studentUpdateForm.getPhoneNumber(), studentUpdateForm.getBirthDate());
+      studentUpdateForm.getPhoneNumber());
+  }
+
+  public void updateStudentInDto(Integer studentId, StudentDto studentUpdateForm) {
+    studentRepository.updateStudent(studentId, studentUpdateForm.getEmail(), studentUpdateForm.getPassword(),
+      studentUpdateForm.getName(), studentUpdateForm.getSurname(), studentUpdateForm.getFaculty(),
+      studentUpdateForm.getPhoneNumber());
   }
 
   public Student getStudentByIdObject(Integer studentId) {
@@ -118,5 +132,4 @@ public class StudentService {
     studentDto.setListOfAllTasks(taskService.getAllUsersTasks(studentId));
     return studentDto;
   }
-
 }

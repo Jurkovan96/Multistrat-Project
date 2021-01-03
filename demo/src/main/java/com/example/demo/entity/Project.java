@@ -13,7 +13,6 @@ import java.util.List;
 @Table(name = "project")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 public class Project {
 
   @Id

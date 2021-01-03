@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
   <title>User Profile</title>
@@ -71,89 +72,10 @@
       line-height: 22px;
       font-size: 18px;
     }
-
-    body {
-      margin-top: 20px;
-      background: #f5f5f5;
-    }
-
-    /**
-     * Panels
-     */
-    /*** General styles ***/
-    .panel {
-      box-shadow: none;
-    }
-
-    .panel-heading {
-      border-bottom: 0;
-    }
-
-    .panel-title {
-      font-size: 17px;
-    }
-
-    .panel-title > small {
-      font-size: .75em;
-      color: #999999;
-    }
-
-    .panel-body *:first-child {
-      margin-top: 0;
-    }
-
-    .panel-footer {
-      border-top: 0;
-    }
-
-    .panel-default > .panel-heading {
-      color: #333333;
-      background-color: transparent;
-      border-color: rgba(0, 0, 0, 0.07);
-    }
-
-    form label {
-      color: #999999;
-      font-weight: 400;
-    }
-
-    .form-horizontal .form-group {
-      margin-left: -15px;
-      margin-right: -15px;
-    }
-
-    @media (min-width: 768px) {
-      .form-horizontal .control-label {
-        text-align: right;
-        margin-bottom: 0;
-        padding-top: 7px;
-      }
-    }
-
-    .profile__contact-info-icon {
-      float: left;
-      font-size: 18px;
-      color: #999999;
-    }
-
-    .profile__contact-info-body {
-      overflow: hidden;
-      padding-left: 20px;
-      color: #999999;
-    }
-
-    .profile-avatar {
-      width: 200px;
-      position: relative;
-      margin: 0px auto;
-      margin-top: 196px;
-      border: 4px solid #f3f3f3;
-    }
-
   </style>
 </head>
 <body>
-<div class="col-lg-4">
+<div class="col-lg-4 row justify-content-center">
   <c:set var="student" value="${studentModel}"/>
   <div class="text-center card-box">
     <div class="member-card pt-2 pb-2">
@@ -175,14 +97,13 @@
       <c:set var="currentUser" value="${currentUser}"/>
       <c:if test="${not empty currentUser}">
         <button type="button" onclick="showOptions()"
-                class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">Message Now
+                class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">Show more options
+        </button>
+        <button type="button" onclick="hideOptions()"
+                class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">Collapse
         </button>
       </c:if>
 
-      <div id="userForm"></div>
-
-
-      <div id="edit"> This is a div!!!!!!</div>
       <div class="mt-4">
         <div class="row">
           <div class="col-4">
@@ -209,150 +130,51 @@
   </div>
 </div>
 
-<div class="container bootstrap snippets bootdeys">
-  <div class="row">
-    <div class="col-xs-12 col-sm-9">
-      <form class="form-horizontal">
-        <div class="panel panel-default">
-          <div class="panel-body text-center">
-            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="img-circle profile-avatar"
-                 alt="User avatar">
-          </div>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">User info</h4>
-          </div>
-          <div class="panel-body">
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Location</label>
-              <div class="col-sm-10">
-                <select class="form-control">
-                  <option selected="">Select country</option>
-                  <option>Belgium</option>
-                  <option>Canada</option>
-                  <option>Denmark</option>
-                  <option>Estonia</option>
-                  <option>France</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Company name</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Position</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control">
-              </div>
-            </div>
-          </div>
-        </div>
+<div id="edit" class="container bootstrap snippets bootdeys" style="display: none">
+  <%--@elvariable id="studentUpdateForm" type="com.example.demo.model.StudentUpdateForm"--%>
 
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">Contact info</h4>
-          </div>
-          <div class="panel-body">
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Work number</label>
-              <div class="col-sm-10">
-                <input type="tel" class="form-control">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Mobile number</label>
-              <div class="col-sm-10">
-                <input type="tel" class="form-control">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">E-mail address</label>
-              <div class="col-sm-10">
-                <input type="email" class="form-control">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Work address</label>
-              <div class="col-sm-10">
-                <textarea rows="3" class="form-control"></textarea>
-              </div>
-            </div>
-          </div>
-        </div>
+  <form:form method="POST" cssStyle="align-items: center" action="/profile" modelAttribute="studentUpdateForm">
+    <form:label path="name">Name</form:label>
+    <form:input path="name"/>
 
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">Security</h4>
-          </div>
-          <div class="panel-body">
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Current password</label>
-              <div class="col-sm-10">
-                <input type="password" class="form-control">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">New password</label>
-              <div class="col-sm-10">
-                <input type="password" class="form-control">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-sm-10 col-sm-offset-2">
-                <div class="checkbox">
-                  <input type="checkbox" id="checkbox_1">
-                  <label for="checkbox_1">Make this account public</label>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-sm-10 col-sm-offset-2">
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <button type="reset" class="btn btn-default">Cancel</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
+    <form:label path="surname">Surname</form:label>
+    <form:input path="surname"/>
+
+    <form:label path="email">Email</form:label>
+    <form:input path="email"/>
+
+    <form:label path="faculty">Faculty</form:label>
+    <form:input path="faculty"/>
+
+    <form:label path="password">Password</form:label>
+    <form:password showPassword="true" path="password"/>
+
+    <form:label path="phoneNumber">Phone number</form:label>
+    <form:input path="phoneNumber"/>
+
+    <input type="submit" value="Submit"/>
+  </form:form>
+
+
 </div>
+
 <script>
-  $('buttonId').on('click', function () {
-
-    var data = 'dmc=' + encodeURIComponent(dmc.value);
-    $.ajax({
-      url: "homepageStudent/tasks",
-      data: data,
-      type: "GET",
-
-      success: function (response) {
-        alert(response);
-        $message._show('success', response);
-      },
-      error: function (xhr, status, error) {
-        alert(xhr.responseText);
-      },
-      complete: function () {
-        window.location = 'profile.jsp';
-      }
-    });
-  });
-
   function showOptions() {
     var i = document.getElementById('edit');
-    if (i.style.visibility === 'hidden') {
-      i.style.visibility = 'visible';
+    if (i.style.display === 'none') {
+      i.style.display = 'block';
     }
-    if (i.style.visibility === 'visible') {
-      i.style.visibility = 'hidden';
-    }
+    console.log(i.style.display);
   }
+
+  function hideOptions() {
+    var i = document.getElementById('edit');
+    if (i.style.display === 'block') {
+      i.style.display = 'none';
+    }
+    console.log(i.style.display);
+  }
+
 </script>
 </body>
-
 </html>
