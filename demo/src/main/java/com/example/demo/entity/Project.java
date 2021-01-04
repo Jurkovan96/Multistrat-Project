@@ -1,7 +1,6 @@
 package com.example.demo.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -27,8 +26,7 @@ public class Project {
   private Date projectStartDate;
 
   @Column(name = "estimated_time")
-  @Temporal(TemporalType.TIMESTAMP)
-  private Date projectEstimatedTime;
+  private int projectEstimatedTime;
 
   @OneToOne(fetch = FetchType.LAZY)
   private Team projectTeam;
@@ -72,11 +70,11 @@ public class Project {
     this.projectStartDate = projectStartDate;
   }
 
-  public Date getProjectEstimatedTime() {
+  public int getProjectEstimatedTime() {
     return projectEstimatedTime;
   }
 
-  public void setProjectEstimatedTime(Date projectEstimatedTime) {
+  public void setProjectEstimatedTime(int projectEstimatedTime) {
     this.projectEstimatedTime = projectEstimatedTime;
   }
 

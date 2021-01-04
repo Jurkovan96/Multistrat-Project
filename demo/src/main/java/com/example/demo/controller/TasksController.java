@@ -37,7 +37,6 @@ public class TasksController {
   public String editTaskStatus(@PathVariable Integer taskId, Model model) {
     Task task = taskService.getTaskById(taskId);
     task.setTaskStatus(Constants.FINISHED);
-    //model.addAttribute("task", task);
     taskService.updateStatus(task.getTaskId(), task);
     return "redirect:/tasks";
   }
@@ -45,7 +44,6 @@ public class TasksController {
   @GetMapping("/{taskId}/{taskName}")
   public String editTaskReview(@PathVariable Integer taskId, @PathVariable String taskName) {
     Task task = taskService.getTaskById(taskId);
-    //model.addAttribute("task2", task);
     task.setTaskReview("Review Added");
     System.out.println(taskName);
     taskService.updateReview(task.getTaskId(), "task");

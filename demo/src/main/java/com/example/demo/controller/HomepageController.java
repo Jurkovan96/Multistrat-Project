@@ -84,4 +84,5 @@ public class HomepageController {
   public String displayTasksForCompany() {
     return "redirect:/task";
   }
+
 }

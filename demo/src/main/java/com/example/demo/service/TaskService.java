@@ -94,4 +94,16 @@ public class TaskService {
   public void updateReview(Integer taskId, String taskReview) {
     taskRepository.updateTaskReview(taskId, taskReview);
   }
+
+  public void deleteTaskById(Integer id) {
+    taskRepository.delete(taskRepository.findByTaskId(id));
+  }
+
+  public void addNewTask(Task task) {
+    taskRepository.save(task);
+  }
+
+  public void updateTask(Integer id, Task task) {
+    taskRepository.updateTask(id,  task.getTaskName(), task.getTaskStatus(), task.getUserId(), task.getProject());
+  }
 }

@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Company;
 import com.example.demo.entity.Project;
 import com.example.demo.entity.Team;
 import com.example.demo.repository.ProjectRepository;
@@ -33,5 +32,17 @@ public class ProjectService {
   public void deleteProjectById(Integer id) {
     Project project = projectRepository.findByProjectId(id);
     projectRepository.delete(project);
+  }
+
+  public void updateProject(Integer id, Project project) {
+    projectRepository.updateProject(id, project.getProjectName(), project.getProjectEstimatedTime(), project.getProjectTeam());
+  }
+
+  public void addProject(Project project) {
+    projectRepository.save(project);
+  }
+
+  public Project getProjectByName(String project) {
+    return projectRepository.findByProjectName(project);
   }
 }

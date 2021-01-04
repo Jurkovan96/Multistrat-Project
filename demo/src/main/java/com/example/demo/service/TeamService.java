@@ -41,6 +41,11 @@ public class TeamService {
     return studentService.getAllWithTasks(team.getListOfStudentsForTeam());
   }
 
+  public Team getTeamByName(String teamName) {
+    return teamRepository.findByTeamName(teamName);
+  }
 
-
+  public List<Team> getAllTeams() {
+    return teamRepository.findAll();
+  }
 }
