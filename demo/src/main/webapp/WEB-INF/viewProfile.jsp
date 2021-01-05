@@ -11,7 +11,8 @@
           integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
           crossorigin="anonymous"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
   <style type="text/css">
     body {
@@ -75,7 +76,7 @@
   </style>
 </head>
 <body>
-<div class="col-lg-4 row justify-content-center">
+<div class="container">
   <c:set var="student" value="${studentModel}"/>
   <div class="text-center card-box">
     <div class="member-card pt-2 pb-2">
@@ -87,11 +88,11 @@
                                                                       class="text-pink">websitename.com</a></span>
         </p>
       </div>
-      <ul class="social-links list-inline">
+      <ul class="social-links list-inline px-3">
         <c:forEach var="link" items="${student.listOfContacts}">
 
-          <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href=""
-                                          data-original-title="Facebook">${link}<i class="fa fa-facebook"></i></a></li>
+          <li class="list-inline-item px-3"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href=""
+                                          data-original-title="Facebook">${link}<i class=""></i></a></li>
         </c:forEach>
       </ul>
       <c:set var="currentUser" value="${currentUser}"/>
@@ -130,31 +131,36 @@
   </div>
 </div>
 
-<div id="edit" class="container bootstrap snippets bootdeys" style="display: none">
+<div id="edit" class="container bootstrap snippets bootdeys pr-5" style="display: none">
   <%--@elvariable id="studentUpdateForm" type="com.example.demo.model.StudentUpdateForm"--%>
-
-  <form:form method="POST" cssStyle="align-items: center" action="/profile" modelAttribute="studentUpdateForm">
+<div class="form-group py-3 mr-5">
+  <form:form method="POST" cssStyle="align-items: center" action="/profile" modelAttribute="studentUpdateForm" class="mr-5 text-right">
     <form:label path="name">Name</form:label>
-    <form:input path="name"/>
+    <form:input path="name"/><br>
 
     <form:label path="surname">Surname</form:label>
-    <form:input path="surname"/>
+    <form:input path="surname"/><br>
+
 
     <form:label path="email">Email</form:label>
-    <form:input path="email"/>
+    <form:input path="email"/><br>
+
 
     <form:label path="faculty">Faculty</form:label>
-    <form:input path="faculty"/>
+    <form:input path="faculty"/><br>
+
 
     <form:label path="password">Password</form:label>
-    <form:password showPassword="true" path="password"/>
+    <form:password showPassword="true" path="password"/><br>
+
 
     <form:label path="phoneNumber">Phone number</form:label>
-    <form:input path="phoneNumber"/>
+    <form:input path="phoneNumber"/><br>
+
 
     <input type="submit" value="Submit"/>
   </form:form>
-
+</div>
 
 </div>
 

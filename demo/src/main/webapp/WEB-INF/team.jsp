@@ -15,8 +15,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <%@ include file="styleHomeStudent.jspf" %>
 
 <body>
@@ -24,10 +24,10 @@
 
 
 <div class="w3-row-padding w3-padding-64 w3-container">
-  <div id="userContainer" class="container" style="float: right">
-    <table class="table table-dark">
+  <div id="userContainer" class="container py-5">
+    <table class="table table-dark table-hover table-bordered">
       <thead>
-      <tr>
+      <tr style="text-align: center">
         <th scope="col">FirstName</th>
         <th scope="col">LastName</th>
         <th scope="col">Current task</th>
@@ -35,7 +35,7 @@
       </thead>
       <tbody>
       <c:forEach items="${StudentList}" var="student">
-        <tr id="draggableRow">
+        <tr style="text-align: center" id="draggableRow">
           <td onclick="clickItem()">${student.name}</td>
           <td><a href="/profile/user/${student.id}" style="color: white">${student.surname}</a></td>
           <td id="taskS">${student.currentTask}</td>
@@ -48,7 +48,7 @@
   </div>
 </div>
 
-<div id="dropZone">This is a drop zone</div>
+<%--<div id="dropZone">This is a drop zone</div>--%>
 
 <%@ include file="footerStudent.jspf" %>
 

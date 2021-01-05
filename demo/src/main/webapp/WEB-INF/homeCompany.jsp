@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link href='https://fonts.googleapis.com/css?family=RobotoDraft' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <style>
   html, body, h1, h2, h3, h4, h5 {
     font-family: "RobotoDraft", "Roboto", sans-serif
@@ -59,9 +61,9 @@
 <!-- Modal that pops up when you click on "New Message" -->
 <div id="id01" class="w3-modal" style="z-index:4">
   <div class="w3-modal-content w3-animate-zoom">
-    <div class="w3-container w3-padding w3-red">
+    <div class="w3-container w3-padding w3-dark-gray">
        <span onclick="document.getElementById('id01').style.display='none'"
-             class="w3-button w3-red w3-right w3-xxlarge"><i class="fa fa-remove"></i></span>
+             class="w3-button w3-dark-gray w3-right w3-xxlarge"><i class="fa fa-remove"></i></span>
       <h2>Publish internship</h2>
     </div>
     <form class="w3-panel" id="from-post" action="<c:url value="/homepageCompany"/>" method="post">
@@ -76,12 +78,9 @@
              placeholder="What are the real benefits?">
       <div class="w3-section">
         <a class="w3-button w3-red" onclick="document.getElementById('id01').style.display='none'">Cancel  <i
-          class="fa fa-remove"></i></a>
-        <a class="w3-button w3-light-grey w3-right"
-           onclick="document.getElementById('id01').style.display='none'">Publish  <i
-          class="fa fa-paper-plane"></i></a>
-
-        <button class="w3-bar-item" type="submit">Save internship</button>
+                class="fa fa-remove"></i></a>
+        <button class="btn btn-success" type="submit">Save project</button>
+      </div>
       </div>
     </form>
   </div>
